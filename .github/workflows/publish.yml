@@ -3,7 +3,7 @@ on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
   pull_request:
-    types: closed
+#    types: closed
 
 jobs:
   publish:
@@ -20,4 +20,5 @@ jobs:
       - name: Run Document Generator
         run:  psp build -c ./templates/config.json -t ./templates --noninteractive
       - name: Publish Output to Confluence
-        run:  psp publish --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}
+        run: |
+           psp publish --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}
