@@ -5,30 +5,14 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14'
-      - name: Check out source code
-        uses: actions/checkout@v2
-      - name: Install dependency on policy builder
-        run: npm install -g @jupiterone/jupiter-policy-builder
-      - name: Run Document Generator
-        run:  psp build -c ./templates/config.json -t ./templates --noninteractive
-
   publish:
     if: github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    needs: validate
+    defaults:
+      run:
+        working-directory: ./
     steps:
       - name: Setup Node
         uses: actions/setup-node@v1
