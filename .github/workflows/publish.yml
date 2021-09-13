@@ -18,9 +18,10 @@ jobs:
       - name: Install dependency on policy builder
         run: npm install -g @jupiterone/jupiter-policy-builder
       - name: Run Document Generator
-        run:  psp build -c ./templates/config.json -t ./templates --noninteractive
+        run:  psp build -c ./templates/config.json -t ./templates -n &&
+        psp publish -d ./docs --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}
       - name: Where am I
         run: pwd && ls
-      - name: Publish Output to Confluence
-        run: |
-           "psp publish --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}"
+#      - name: Publish Output to Confluence
+#        run: |
+#           "psp publish --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}"
