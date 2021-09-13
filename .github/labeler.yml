@@ -9,3 +9,7 @@ procedure-change:
 # Add code change label to any change of files ending with tf
 standards-change:
   templates/standards/**/*
+
+# Add github-config-change label if anything in .github changes
+github-config-change:
+  .github/**/*
