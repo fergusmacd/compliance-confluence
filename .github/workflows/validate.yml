@@ -1,0 +1,24 @@
+name: Build
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Check out source code
+        uses: actions/checkout@v2
+      - name: Install dependency on policy builder
+        run: npm install -g @jupiterone/jupiter-policy-builder
+      - name: Run Document Generator
+        run:  psp build -c ./templates/config.json -t ./templates --noninteractive
