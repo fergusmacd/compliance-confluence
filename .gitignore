@@ -1,0 +1,12 @@
+dist/
+*.log
+coverage/
+node_modules/
+work/
+package-lock.json
+data/
+docs/
+partials/
+*.bak
+/publish-j1dev.sh
+*.iml
