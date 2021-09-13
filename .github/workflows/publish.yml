@@ -1,14 +1,12 @@
-name: Build
+name: Publish
 on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
-  push:
-    branches:
-      - main
+  pull_request:
+    types: closed
 
 jobs:
   publish:
-    if: github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node
