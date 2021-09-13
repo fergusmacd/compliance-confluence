@@ -26,9 +26,9 @@ jobs:
         run:  psp build -c ./templates/config.json -t ./templates --noninteractive
 
   publish:
-    if: github.event.pull_request.merged == true
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    needs: [validate]
+    needs: validate
     steps:
       - name: Setup Node
         uses: actions/setup-node@v1
