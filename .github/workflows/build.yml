@@ -1,0 +1,19 @@
+name: Build
+on: [push, pull_request]
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Check out source code
+        uses: actions/checkout@v2
+      - name: Install dependency on policy builder
+      - run: npm install -g @jupiterone/jupiter-policy-builder
+      - name: Run psp
+        run:  psp build -c ./templates/config.json -t ./templates --noninteractive
