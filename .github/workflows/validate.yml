@@ -16,7 +16,7 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
       - name: Install dependency on policy builder
-        run: npm install -g @jupiterone/jupiter-policy-builder
+        run: npm install -g @jupiterone/security-policy-builder
       - name: Run Document Generator
         run:  |
             psp build -c ./templates/config.json -t ./templates --noninteractive &&
