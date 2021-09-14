@@ -3,7 +3,7 @@ on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
   pull_request:
-#    types: closed
+    types: closed
 
 jobs:
   publish:
@@ -16,12 +16,9 @@ jobs:
       - name: Check out source code
         uses: actions/checkout@v2
       - name: Install dependency on policy builder
-        run: npm install -g @jupiterone/jupiter-policy-builder
+        run: npm install -g @jupiterone/security-policy-builder
       - name: Run Document Generator
-        run:  psp build -c ./templates/config.json -t ./templates -n &&
-        psp publish -d ./docs --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}
-      - name: Where am I
-        run: pwd && ls
-#      - name: Publish Output to Confluence
-#        run: |
-#           "psp publish --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}"
+        run:  psp build -c ./templates/config.json -t ./templates -n
+      - name: Publish Output to Confluence
+        run: |
+          psp publish -d ./docs --confluence --site tottoro --space TS -u ${{ secrets.CONFLUENCE_USERNAME }} -k ${{ secrets.CONFLUENCE_PASSWORD }}
